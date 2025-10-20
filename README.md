@@ -143,6 +143,16 @@ Questa guida scompone i concetti complessi in articoli semplici e facili da dige
 
 ---
 
+```mermaid
+    graph TD;
+    Fundamentals-->Core-Foundation-Guide;
+    System-Anatomy-->Core-Foundation-Guide;
+    Core-Concepts-->Core-Foundation-Guide;
+    Advanced-Topics-->Core-Foundation-Guide;
+```
+
+---
+
 ## 📈 Aggiornamenti Futuri / Future Updates
 
 <p>🇮🇹 Verranno aggiunti periodicamente nuovi argomenti AI.</p>
