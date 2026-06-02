@@ -113,4 +113,4 @@
 </script>
 
 <!-- Fixed, full-screen canvas sitting behind all content. -->
-<div bind:this={container} class="fixed top-0 left-0 w-full h-full -z-10"></div>
+<div bind:this={container} class="fixed left-0 top-0 -z-10 h-full w-full"></div>

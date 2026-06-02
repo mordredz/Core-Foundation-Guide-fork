@@ -1,17 +1,10 @@
 <!-- src/lib/components/Footer.svelte -->
 <script lang="ts">
 	const githubUrl = 'https://github.com/d4N-87/Core-Foundation-Guide';
-	// English: Get the current year dynamically for the copyright notice.
-	// Italiano: Ottiene dinamicamente l'anno corrente per la nota di copyright.
 	const currentYear = new Date().getFullYear();
 </script>
 
-<!-- 
-  English: The GitHub SVG icon is defined as a symbol directly within the component. 
-           This makes the component self-contained and the icon can be reused with the `<use>` tag.
-  Italiano: L'icona SVG di GitHub è definita come simbolo direttamente nel componente. 
-            Questo lo rende autonomo e l'icona può essere riutilizzata con il tag `<use>`.
--->
+<!-- GitHub icon defined as a reusable <symbol>, kept self-contained in this component. -->
 <svg class="hidden">
 	<symbol id="icon-github" viewBox="0 0 24 24" fill="currentColor">
 		<path
@@ -20,26 +13,13 @@
 	</symbol>
 </svg>
 
-<footer
-	class="w-full border-t border-cyan-900/50 bg-black/30 px-4 py-6 backdrop-blur-md md:px-8"
->
-	<!-- 
-    English: Main container that handles the responsive layout: stacks items vertically on small screens (`flex-col`) 
-             and places them in a row on larger screens (`sm:flex-row`).
-    Italiano: Contenitore principale che gestisce il layout responsivo: impila gli elementi in verticale su schermi piccoli (`flex-col`) 
-              e li dispone in riga su schermi più grandi (`sm:flex-row`).
-  -->
-	<div
-		class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row"
-	>
-		<!-- English: Left side: Copyright information. -->
-		<!-- Italiano: Lato sinistro: Informazioni sul copyright. -->
+<footer class="w-full border-t border-cyan-900/50 bg-black/30 px-4 py-6 backdrop-blur-md md:px-8">
+	<!-- Stacks vertically on small screens, row on larger ones. -->
+	<div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row">
 		<p class="text-sm text-slate-400">
 			© {currentYear} Core Foundation Guide. An interactive field manual for AI concepts.
 		</p>
 
-		<!-- English: Right side: Link to the GitHub repository using the SVG icon. -->
-		<!-- Italiano: Lato destro: Link alla repository GitHub che utilizza l'icona SVG. -->
 		<a
 			href={githubUrl}
 			target="_blank"
