@@ -6,14 +6,16 @@ export default defineConfig({
 	plugins: [sveltekit()],
 
 	resolve: {
-		// Keep path aliases in sync with svelte.config.js and tsconfig.
+		// EN: Keep path aliases in sync with svelte.config.js and tsconfig.
+		// IT: Mantiene gli alias dei percorsi allineati con svelte.config.js e tsconfig.
 		alias: {
 			$lib: '/src/lib'
 		}
 	},
 
 	optimizeDeps: {
-		// Pre-bundle gsap for a smoother dev server start.
+		// EN: Pre-bundle gsap for a smoother dev server start.
+		// IT: Pre-impacchetta gsap per un avvio più fluido del dev server.
 		include: ['gsap']
 	}
 });

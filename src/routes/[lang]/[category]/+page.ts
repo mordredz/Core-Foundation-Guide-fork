@@ -2,7 +2,8 @@
 import { getPosts } from '$lib/posts';
 import type { PageLoad } from './$types';
 
-// Loads a category index page: all posts for the given language + category.
+// EN: Loads a category index page: all posts for the given language + category.
+// IT: Carica una pagina indice di categoria: tutti i post per la lingua + categoria date.
 export const load: PageLoad = async ({ params, parent }) => {
 	const lang = params.lang.replace(/\.html$/, '');
 	const category = params.category.replace(/\.html$/, '');

@@ -26,7 +26,8 @@
 
 	const categoryOrder = ['fundamentals', 'system_anatomy', 'core_concepts', 'advanced_topics'];
 
-	// Unique categories, ordered by categoryOrder (unknowns last).
+	// EN: Unique categories, ordered by categoryOrder (unknowns last).
+	// IT: Categorie uniche, ordinate secondo categoryOrder (le sconosciute in fondo).
 	const categories = [...new Set(allPosts.map((p) => p.categorySlug))]
 		.map((slug) => {
 			const postInCategory = allPosts.find((p) => p.categorySlug === slug)!;
@@ -47,7 +48,8 @@
 	let searchTerm = '';
 	let selectedCategories: string[] = [];
 
-	// Recompute the visible posts whenever the search term or filters change.
+	// EN: Recompute the visible posts whenever the search term or filters change.
+	// IT: Ricalcola i post visibili ogni volta che cambiano il testo di ricerca o i filtri.
 	$: filteredPosts = allPosts.filter((post) => {
 		const searchMatch =
 			searchTerm === '' ||
@@ -59,14 +61,16 @@
 		return searchMatch && categoryMatch;
 	});
 
-	// Navigate to the article when a card is clicked.
+	// EN: Navigate to the article when a card is clicked.
+	// IT: Naviga all'articolo quando una card viene cliccata.
 	function handleCardClick(event: CustomEvent<{ post: Post }>) {
 		const { post } = event.detail;
 		if (!lang) return;
 		goto(`${base}/${lang}/${post.categorySlug}/${post.slug}.html`);
 	}
 
-	// Scroll to the selected post and flash a highlight around it.
+	// EN: Scroll to the selected post and flash a highlight around it.
+	// IT: Scorre fino al post selezionato e fa lampeggiare un'evidenziazione attorno.
 	function handleIndexClick(event: CustomEvent<string>) {
 		const slug = event.detail;
 		const cardElement = gridWrapperElement?.querySelector(`[data-slug="${slug}"]`);
@@ -95,7 +99,8 @@
 		if (!mapButtonElement) return;
 		const shineElement = mapButtonElement.querySelector('.shine-effect');
 		if (!shineElement) return;
-		// Paused timeline replayed on hover for the button's shine sweep.
+		// EN: Paused timeline replayed on hover for the button's shine sweep.
+		// IT: Timeline in pausa, rigiocata all'hover per l'effetto "shine" del pulsante.
 		const timeline = gsap.timeline({ paused: true });
 		timeline.fromTo(shineElement, { x: '-110%' }, { x: '110%', duration: 0.5, ease: 'power1.in' });
 		mapButtonElement.addEventListener('mouseenter', () => timeline.restart());
@@ -107,7 +112,8 @@
 	description="Core Foundation Guide: un manuale interattivo e una guida di riferimento per i concetti fondamentali dell'intelligenza artificiale."
 />
 
-<!-- Toggles the ContentIndex. -->
+<!-- EN: Toggles the ContentIndex. -->
+<!-- IT: Mostra/nasconde il ContentIndex. -->
 <div class="pt-8 text-center">
 	<button
 		bind:this={mapButtonElement}
@@ -116,7 +122,8 @@
            border-slate-700 bg-slate-900/50 px-6 py-3 font-semibold text-slate-300
            transition-colors hover:border-amber-400 hover:text-white"
 	>
-		<!-- Animated shine sweep on hover. -->
+		<!-- EN: Animated shine sweep on hover. -->
+		<!-- IT: Sweep luminoso animato all'hover. -->
 		<span
 			class="shine-effect absolute inset-0 -skew-x-[15deg] bg-gradient-to-r from-transparent via-white/30 to-transparent"
 		></span>
@@ -164,7 +171,8 @@
 	</div>
 {/if}
 
-<!-- Search + category filters. -->
+<!-- EN: Search + category filters. -->
+<!-- IT: Ricerca + filtri per categoria. -->
 <section class="px-4 pt-8 text-center md:mb-6">
 	<div class="mx-auto max-w-lg">
 		<input
@@ -176,7 +184,8 @@
 	</div>
 	<div class="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
 		{#each categories as category}
-			<!-- has-[:checked] styles the label based on the checkbox state. -->
+			<!-- EN: has-[:checked] styles the label based on the checkbox state. -->
+			<!-- IT: has-[:checked] stila la label in base allo stato della checkbox. -->
 			<label
 				class="has[:checked]:border-amber-500 flex cursor-pointer items-center gap-2 rounded-lg border-2 border-transparent p-2 transition-all hover:bg-slate-800/50 has-[:checked]:bg-amber-900/30 has-[:checked]:shadow-[0_0_15px_theme(colors.amber.500/0.4)]"
 			>
@@ -196,7 +205,8 @@
 	</div>
 </section>
 
-<!-- Grid of filtered posts. -->
+<!-- EN: Grid of filtered posts. -->
+<!-- IT: Griglia dei post filtrati. -->
 <div bind:this={gridWrapperElement} class="mx-auto max-w-7xl px-4 pb-12">
 	<NodeGrid posts={filteredPosts} on:cardclick={handleCardClick} />
 	{#if filteredPosts.length === 0 && allPosts.length > 0}

@@ -11,10 +11,12 @@
 	type AnimateGridParams = { posts: Post[]; gsap: typeof GSAP | undefined };
 
 	const dispatch = createEventDispatcher();
-	// GSAP is imported lazily in onMount to keep it out of the initial bundle.
+	// EN: GSAP is imported lazily in onMount to keep it out of the initial bundle.
+	// IT: GSAP è importato in modo lazy in onMount per tenerlo fuori dal bundle iniziale.
 	let gsap: typeof GSAP | undefined = undefined;
 
-	// Forward a card click to the parent (which performs navigation).
+	// EN: Forward a card click to the parent (which performs navigation).
+	// IT: Inoltra il click su una card al genitore (che esegue la navigazione).
 	function handleCardClick(event: MouseEvent | KeyboardEvent, post: Post) {
 		dispatch('cardclick', {
 			post: post,
@@ -22,18 +24,21 @@
 		});
 	}
 
-	// Svelte action that wires up all GSAP grid animations.
+	// EN: Svelte action that wires up all GSAP grid animations.
+	// IT: Action di Svelte che collega tutte le animazioni GSAP della griglia.
 	function animateGrid(node: HTMLElement, params: AnimateGridParams) {
 		let ctx: gsap.Context;
 		async function init() {
 			if (!params.gsap) return;
-			// Wait for the cards to be in the DOM before selecting them.
+			// EN: Wait for the cards to be in the DOM before selecting them.
+			// IT: Attende che le card siano nel DOM prima di selezionarle.
 			await tick();
 			if (ctx) ctx.revert();
 			const cards = params.gsap.utils.toArray<HTMLElement>('.card-container');
 			if (cards.length === 0) return;
 			ctx = params.gsap.context(() => {
-				// Continuous, subtle floating motion for the cards.
+				// EN: Continuous, subtle floating motion for the cards.
+				// IT: Movimento fluttuante, continuo e leggero, per le card.
 				function createFloatingAnimation() {
 					params.gsap!.to(cards, {
 						y: (i) => params.gsap!.utils.random(-8, 8),
@@ -44,7 +49,8 @@
 						delay: (i) => params.gsap!.utils.random(0, 4)
 					});
 				}
-				// Pre-build a paused color timeline per card for cheap hover transitions.
+				// EN: Pre-build a paused color timeline per card for cheap hover transitions.
+				// IT: Pre-costruisce una timeline colore in pausa per card, per transizioni hover leggere.
 				cards.forEach((card: any) => {
 					card.colorTimeline = params
 						.gsap!.timeline({ paused: true })
@@ -54,9 +60,11 @@
 						.to(card.querySelector('.card-category-dot'), { backgroundColor: '#F59E0B' }, 0);
 				});
 				createFloatingAnimation();
-				// Pause floating while the pointer is over the grid for a more direct feel.
+				// EN: Pause floating while the pointer is over the grid for a more direct feel.
+				// IT: Mette in pausa la fluttuazione mentre il puntatore è sulla griglia, per più immediatezza.
 				node.addEventListener('mouseenter', () => params.gsap!.killTweensOf(cards, 'y'));
-				// Magnetic/repulsive interaction between the pointer and the cards.
+				// EN: Magnetic/repulsive interaction between the pointer and the cards.
+				// IT: Interazione magnetica/repulsiva tra il puntatore e le card.
 				node.addEventListener('mousemove', (e: MouseEvent) => {
 					const { left: gridX, top: gridY } = node.getBoundingClientRect();
 					const mouseX = e.clientX - gridX;
@@ -77,7 +85,8 @@
 						}
 					}
 					cards.forEach((card: any) => {
-						// The card under the pointer is highlighted and lifted.
+						// EN: The card under the pointer is highlighted and lifted.
+						// IT: La card sotto il puntatore viene evidenziata e sollevata.
 						if (card === activeCard) {
 							params.gsap!.to(card, {
 								x: 0,
@@ -89,7 +98,8 @@
 							});
 							if (card.colorTimeline) card.colorTimeline.play();
 						} else {
-							// The others are pushed away from the cursor.
+							// EN: The others are pushed away from the cursor.
+							// IT: Le altre vengono respinte lontano dal cursore.
 							const { left, top, width, height } = card.getBoundingClientRect();
 							const cardX = left - gridX + width / 2;
 							const cardY = top - gridY + height / 2;
@@ -114,7 +124,8 @@
 						}
 					});
 				});
-				// Reset everything and resume floating when the pointer leaves.
+				// EN: Reset everything and resume floating when the pointer leaves.
+				// IT: Ripristina tutto e riprende la fluttuazione quando il puntatore esce.
 				node.addEventListener('mouseleave', () => {
 					params.gsap!.to(cards, {
 						x: 0,
@@ -152,7 +163,8 @@
 	class="isolate grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
 	use:animateGrid={{ posts, gsap }}
 >
-	<!-- Keyed by slug for efficient updates when the posts array changes. -->
+	<!-- EN: Keyed by slug for efficient updates when the posts array changes. -->
+	<!-- IT: Con chiave su slug per aggiornamenti efficienti quando l'array dei post cambia. -->
 	{#each posts as post (post.slug)}
 		<div
 			data-slug={post.slug}

@@ -4,9 +4,9 @@
 	import { browser } from '$app/environment';
 	import { type TranslationSet } from '$lib/translations';
 
-	export let text: string; // Article text to read aloud.
-	export let lang: string; // Language code, used to filter voices.
-	export let t: TranslationSet; // UI labels.
+	export let text: string; // EN: Article text to read aloud. / IT: Testo dell'articolo da leggere ad alta voce.
+	export let lang: string; // EN: Language code, used to filter voices. / IT: Codice lingua, usato per filtrare le voci.
+	export let t: TranslationSet; // EN: UI labels. / IT: Etichette della UI.
 
 	let synth: SpeechSynthesis;
 	let utterance: SpeechSynthesisUtterance;
@@ -24,13 +24,15 @@
 		synth = window.speechSynthesis;
 	}
 
-	// Filter the available voices down to the article's language and pick a default.
+	// EN: Filter the available voices down to the article's language and pick a default.
+	// IT: Filtra le voci disponibili in base alla lingua dell'articolo e ne sceglie una di default.
 	function populateVoiceList() {
 		const voices = synth.getVoices();
 		availableVoices = voices.filter((voice) => voice.lang.startsWith(lang));
 
 		if (!selectedVoiceURI && availableVoices.length > 0) {
-			// Prefer a higher-quality voice when one is available.
+			// EN: Prefer a higher-quality voice when one is available.
+			// IT: Preferisce una voce di qualità superiore quando disponibile.
 			const keywords = ['natural', 'online', 'google'];
 			let preferredVoice = availableVoices.find((v) =>
 				keywords.some((k) => v.name.toLowerCase().includes(k))
@@ -60,8 +62,8 @@
 	}
 
 	function handlePlay() {
-		isSpeaking = true; // Update the UI immediately.
-		synth.cancel(); // Drop any in-progress speech.
+		isSpeaking = true; // EN: Update the UI immediately. / IT: Aggiorna subito la UI.
+		synth.cancel(); // EN: Drop any in-progress speech. / IT: Interrompe l'eventuale lettura in corso.
 		createUtterance();
 		synth.speak(utterance);
 	}
@@ -74,18 +76,21 @@
 	onMount(() => {
 		initialize();
 		if (isSupported) {
-			// Voices often load asynchronously.
+			// EN: Voices often load asynchronously.
+			// IT: Le voci spesso si caricano in modo asincrono.
 			synth.onvoiceschanged = populateVoiceList;
-			populateVoiceList(); // ...but they may already be ready.
+			populateVoiceList(); // EN: ...but they may already be ready. / IT: ...ma potrebbero essere già pronte.
 		}
 	});
 
-	// Stop speech on unmount to avoid it outliving the page.
+	// EN: Stop speech on unmount to avoid it outliving the page.
+	// IT: Ferma la lettura allo smontaggio per evitare che sopravviva alla pagina.
 	onDestroy(() => {
 		if (synth) synth.cancel();
 	});
 
-	// Stop playback if the text changes.
+	// EN: Stop playback if the text changes.
+	// IT: Ferma la riproduzione se il testo cambia.
 	$: if (text && browser && isSupported) {
 		handleStop();
 	}
@@ -137,7 +142,8 @@
 				{/if}
 			</div>
 
-			<!-- Settings only make sense when there's more than one voice. -->
+			<!-- EN: Settings only make sense when there's more than one voice. -->
+			<!-- IT: Le impostazioni hanno senso solo quando c'è più di una voce. -->
 			{#if availableVoices.length > 1}
 				<button
 					on:click={() => (showSettings = !showSettings)}

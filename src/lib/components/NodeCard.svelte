@@ -5,7 +5,8 @@
 	export let excerpt: string | undefined;
 </script>
 
-<!-- 3-row card (title / excerpt / category). The group-hover styles are driven by NodeGrid. -->
+<!-- EN: 3-row card (title / excerpt / category). The group-hover styles are driven by NodeGrid. -->
+<!-- IT: Card a 3 righe (titolo / estratto / categoria). Gli stili group-hover sono guidati da NodeGrid. -->
 <div
 	class="card-border card-shadow relative grid
 	         h-full w-full grid-rows-[auto_1fr_auto]
@@ -16,18 +17,19 @@
 	         shadow-cyan-900/50 backdrop-blur-lg
 	         group-hover:border-amber-400/80 group-hover:shadow-amber-500/20"
 >
-	<!-- Title -->
+	<!-- EN: Title / IT: Titolo -->
 	<div class="p-4 pb-3 md:p-5 md:pb-4">
 		<h2 class="card-title text-base font-bold text-gray-100 group-hover:text-amber-400">{title}</h2>
 	</div>
 
-	<!-- Excerpt -->
+	<!-- EN: Excerpt / IT: Estratto -->
 	<div
 		class="card-divider relative overflow-hidden border-t border-cyan-500/20 group-hover:border-amber-400/30"
 	>
 		<div class="h-full p-4 pt-3 md:p-5 md:pt-4">
 			{#if excerpt}
-				<!-- `prose` (Tailwind Typography) styles the HTML rendered from markdown. -->
+				<!-- EN: `prose` (Tailwind Typography) styles the HTML rendered from markdown. -->
+				<!-- IT: `prose` (Tailwind Typography) stila l'HTML generato dal markdown. -->
 				<div
 					class="prose prose-sm
 	                    prose-invert leading-snug text-gray-400 prose-p:text-gray-400 prose-strong:text-amber-400"
@@ -39,13 +41,14 @@
 				<div class="text-transparent">Nessuna anteprima.</div>
 			{/if}
 		</div>
-		<!-- Gradient fade at the bottom of the excerpt. -->
+		<!-- EN: Gradient fade at the bottom of the excerpt. -->
+		<!-- IT: Sfumatura a gradiente in fondo all'estratto. -->
 		<div
 			class="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-slate-950/60 to-transparent"
 		></div>
 	</div>
 
-	<!-- Category footer -->
+	<!-- EN: Category footer / IT: Footer della categoria -->
 	<div>
 		<div class="card-divider border-t border-cyan-500/20 group-hover:border-amber-400/30"></div>
 		<div

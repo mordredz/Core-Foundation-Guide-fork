@@ -7,17 +7,20 @@
 
 	export let data: PageData;
 
-	// Client-side redirect to the default language landing page.
+	// EN: Client-side redirect to the default language landing page.
+	// IT: Reindirizzamento lato client alla pagina iniziale della lingua predefinita.
 	onMount(() => {
 		if (data.defaultLang) {
 			const targetPath = `${base}/${data.defaultLang}.html`;
-			// replaceState avoids polluting history so the back button still works.
+			// EN: replaceState avoids polluting history so the back button still works.
+			// IT: replaceState evita di sporcare la cronologia, così il tasto "indietro" funziona.
 			goto(targetPath, { replaceState: true });
 		}
 	});
 </script>
 
-<!-- Brief placeholder shown until the redirect kicks in. -->
+<!-- EN: Brief placeholder shown until the redirect kicks in. -->
+<!-- IT: Breve segnaposto mostrato finché non scatta il reindirizzamento. -->
 <div class="flex min-h-screen w-full items-center justify-center">
 	<p class="text-white">{data.translations?.it.initializing || 'Initializing...'}</p>
 </div>

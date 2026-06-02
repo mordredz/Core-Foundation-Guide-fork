@@ -8,8 +8,10 @@ bun.lockb
 # Miscellaneous
 /static/
 
-# Bundled third-party library (minified) — never reformat
+# EN: Bundled third-party library (minified) — never reformat
+# IT: Libreria di terze parti inclusa (minificata) — non riformattare mai
 src/lib/vendor/
 
-# Markdown content (prose; keep authored formatting intact)
+# EN: Markdown content (prose; keep authored formatting intact)
+# IT: Contenuti markdown (prosa; mantenere la formattazione originale)
 src/content/

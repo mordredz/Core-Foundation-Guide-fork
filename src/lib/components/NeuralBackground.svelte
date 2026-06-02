@@ -3,20 +3,23 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { loadP5 } from '$lib/utils/p5loader';
 
-	// Container element that hosts the p5 canvas.
+	// EN: Container element that hosts the p5 canvas.
+	// IT: Elemento contenitore che ospita la canvas di p5.
 	let container!: HTMLDivElement;
 
-	// p5 instance, kept so it can be torn down on destroy.
+	// EN: p5 instance, kept so it can be torn down on destroy.
+	// IT: Istanza di p5, conservata per poterla distruggere allo smontaggio.
 	let p5Instance: any;
 
-	// A single particle: manages its own position, velocity and appearance.
+	// EN: A single particle: manages its own position, velocity and appearance.
+	// IT: Una singola particella: gestisce la propria posizione, velocità e aspetto.
 	class Particle {
 		p: any;
 		pos: any;
 		vel: any;
 		acc: any;
 		maxSpeed = 1;
-		isAccent: boolean; // ~10% of particles use the accent color.
+		isAccent: boolean; // EN: ~10% of particles use the accent color. / IT: ~10% delle particelle usa il colore d'accento.
 
 		constructor(p: any) {
 			this.p = p;
@@ -35,7 +38,8 @@
 			this.edges();
 		}
 
-		// Wrap around the screen edges.
+		// EN: Wrap around the screen edges.
+		// IT: Riavvolge ai bordi dello schermo.
 		edges() {
 			if (this.pos.x > this.p.width) this.pos.x = 0;
 			if (this.pos.x < 0) this.pos.x = this.p.width;
@@ -51,10 +55,12 @@
 	}
 
 	onMount(async () => {
-		// Load p5 lazily on the client only.
+		// EN: Load p5 lazily on the client only.
+		// IT: Carica p5 in modo lazy, solo sul client.
 		const p5 = await loadP5();
 
-		// Use lighter settings on touch devices to save resources.
+		// EN: Use lighter settings on touch devices to save resources.
+		// IT: Usa impostazioni più leggere sui dispositivi touch per risparmiare risorse.
 		const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
 		const sketch = (p: any) => {
@@ -76,7 +82,8 @@
 					particle.show();
 				});
 
-				// Connect nearby particles with a line whose opacity fades with distance.
+				// EN: Connect nearby particles with a line whose opacity fades with distance.
+				// IT: Collega le particelle vicine con una linea la cui opacità sfuma con la distanza.
 				for (let i = 0; i < particles.length; i++) {
 					for (let j = i + 1; j < particles.length; j++) {
 						const d = p.dist(
@@ -106,11 +113,13 @@
 		p5Instance = new p5(sketch, container);
 	});
 
-	// Tear down the p5 instance (canvas + draw loop) to avoid a memory leak.
+	// EN: Tear down the p5 instance (canvas + draw loop) to avoid a memory leak.
+	// IT: Distrugge l'istanza di p5 (canvas + loop di draw) per evitare un memory leak.
 	onDestroy(() => {
 		p5Instance?.remove();
 	});
 </script>
 
-<!-- Fixed, full-screen canvas sitting behind all content. -->
+<!-- EN: Fixed, full-screen canvas sitting behind all content. -->
+<!-- IT: Canvas fissa a tutto schermo, posizionata dietro a tutti i contenuti. -->
 <div bind:this={container} class="fixed left-0 top-0 -z-10 h-full w-full"></div>

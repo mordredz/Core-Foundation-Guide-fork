@@ -1,16 +1,19 @@
 /* src/app.css */
 
-/* Tailwind layers, replaced with generated styles at build time. */
+/* EN: Tailwind layers, replaced with generated styles at build time. */
+/* IT: Layer di Tailwind, sostituiti dagli stili generati in fase di build. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* App-wide dark background. */
+/* EN: App-wide dark background. */
+/* IT: Sfondo scuro per tutta l'app. */
 body {
 	background-color: #0a0a0a;
 }
 
-/* Local 'Inter' font; font-display: swap keeps text visible while it loads. */
+/* EN: Local 'Inter' font; font-display: swap keeps text visible while it loads. */
+/* IT: Font 'Inter' locale; font-display: swap mantiene il testo visibile durante il caricamento. */
 @font-face {
 	font-family: 'Inter';
 	src: url('/fonts/Inter-Regular.ttf') format('truetype');

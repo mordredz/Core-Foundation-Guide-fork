@@ -13,11 +13,12 @@
 	const post = data.post;
 	const translations = data.translations;
 	const seo = data.seo;
-	const textContent = data.textContent; // Cleaned text for the TTS control.
+	const textContent = data.textContent; // EN: Cleaned text for the TTS control. / IT: Testo pulito per il controllo TTS.
 	const lang = post?.lang as Language;
 	const t = lang && translations ? translations[lang] : fallbackTranslations;
 
-	// Container for the GSAP fade-in.
+	// EN: Container for the GSAP fade-in.
+	// IT: Contenitore per il fade-in di GSAP.
 	let articleWrapper: HTMLElement;
 
 	onMount(() => {
@@ -30,7 +31,8 @@
 <SEO title={seo.title} description={seo.description} />
 
 <div class="flex w-full flex-grow items-center justify-center p-4 md:p-8">
-	<!-- Starts hidden (visibility: hidden) so GSAP can fade it in cleanly. -->
+	<!-- EN: Starts hidden (visibility: hidden) so GSAP can fade it in cleanly. -->
+	<!-- IT: Parte nascosto (visibility: hidden) così GSAP può farlo comparire in dissolvenza. -->
 	<div
 		bind:this={articleWrapper}
 		class="w-full max-w-4xl rounded-xl border-2 border-cyan-500/30 bg-gradient-to-br from-cyan-950/20 to-slate-950/10 p-6 shadow-2xl shadow-cyan-900/50 backdrop-blur-lg md:p-10"
@@ -44,7 +46,8 @@
 				&larr; {t.backToArticles}
 			</a>
 
-			<!-- The `prose` classes (Tailwind Typography) style the rendered Markdown. -->
+			<!-- EN: The `prose` classes (Tailwind Typography) style the rendered Markdown. -->
+			<!-- IT: Le classi `prose` (Tailwind Typography) stilano il Markdown renderizzato. -->
 			<article
 				class="prose prose-invert lg:prose-xl prose-strong:text-amber-400 prose-ol:text-gray-400 prose-hr:border-cyan-500/30"
 			>
@@ -56,7 +59,8 @@
 					</div>
 				{/if}
 
-				<!-- Safe: content comes from trusted local Markdown files. -->
+				<!-- EN: Safe: content comes from trusted local Markdown files. -->
+				<!-- IT: Sicuro: il contenuto proviene da file Markdown locali e affidabili. -->
 				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				{@html post.content}
 

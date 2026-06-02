@@ -1,10 +1,13 @@
 // src/lib/translations.ts
-// Centralizes all UI string translations, keyed by language code.
+// EN: Centralizes all UI string translations, keyed by language code.
+// IT: Centralizza tutte le traduzioni delle stringhe della UI, indicizzate per codice lingua.
 
-// Supported language codes (derived from the keys below).
+// EN: Supported language codes (derived from the keys below).
+// IT: Codici lingua supportati (derivati dalle chiavi sottostanti).
 export type Language = keyof typeof translations;
 
-// Shape of one translation set, using 'it' as the reference.
+// EN: Shape of one translation set, using 'it' as the reference.
+// IT: Struttura di un singolo set di traduzioni, usando 'it' come riferimento.
 export type TranslationSet = typeof translations.it;
 
 export const translations = {
@@ -112,7 +115,8 @@ export const translations = {
 	}
 };
 
-// English fallback used when a language or key is missing.
+// EN: English fallback used when a language or key is missing.
+// IT: Fallback in inglese usato quando una lingua o una chiave è assente.
 export const fallbackTranslations: TranslationSet = {
 	category: 'Category',
 	connections: 'Connections',

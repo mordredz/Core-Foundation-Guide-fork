@@ -12,7 +12,8 @@
 	let headerElement: HTMLElement;
 
 	onMount(() => {
-		// Intro: stagger each title character in.
+		// EN: Intro: stagger each title character in.
+		// IT: Intro: fa entrare i caratteri del titolo in sequenza (stagger).
 		const initialAnimation = gsap.from('.char-span', {
 			opacity: 0,
 			y: 20,
@@ -22,7 +23,8 @@
 			delay: 0.5
 		});
 
-		// After the intro, give the highlighted characters an occasional pulse.
+		// EN: After the intro, give the highlighted characters an occasional pulse.
+		// IT: Dopo l'intro, dà ai caratteri evidenziati una pulsazione occasionale.
 		initialAnimation.then(() => {
 			const highlightedElements = gsap.utils.toArray<HTMLElement>('.char-highlighted');
 			highlightedElements.forEach((char) => {
@@ -41,9 +43,11 @@
 		const amberColor = '#fbbF24';
 		const baseColor = '#e2e8f0';
 
-		// GSAP context so all listeners/tweens are reverted on destroy.
+		// EN: GSAP context so all listeners/tweens are reverted on destroy.
+		// IT: Contesto GSAP così listener/tween vengono annullati allo smontaggio.
 		const ctx = gsap.context(() => {
-			// Interactive glow: characters near the pointer light up.
+			// EN: Interactive glow: characters near the pointer light up.
+			// IT: Bagliore interattivo: i caratteri vicini al puntatore si illuminano.
 			headerElement.addEventListener('mousemove', (e) => {
 				const { left, top } = headerElement.getBoundingClientRect();
 				const mouseX = e.clientX - left;
@@ -55,7 +59,8 @@
 					const charY = top - headerElement.getBoundingClientRect().top + height / 2;
 
 					const distance = Math.hypot(mouseX - charX, mouseY - charY);
-					// 1 = close to the pointer, 0 = far.
+					// EN: 1 = close to the pointer, 0 = far.
+					// IT: 1 = vicino al puntatore, 0 = lontano.
 					const proximity = gsap.utils.mapRange(0, 100, 1, 0, distance);
 
 					gsap.to(char, {
@@ -67,7 +72,8 @@
 				});
 			});
 
-			// Reset when the pointer leaves the header.
+			// EN: Reset when the pointer leaves the header.
+			// IT: Ripristina quando il puntatore esce dall'header.
 			headerElement.addEventListener('mouseleave', () => {
 				gsap.to(chars, {
 					textShadow: '0 0 10px rgba(251, 191, 36, 0)',
@@ -98,11 +104,13 @@
 				<img src={logoUrl} alt="Logo" class="h-10 w-10 md:h-12 md:w-12" />
 			</a>
 
-			<!-- Responsive title; min-w-0 keeps it from shoving siblings on small screens. -->
+			<!-- EN: Responsive title; min-w-0 keeps it from shoving siblings on small screens. -->
+			<!-- IT: Titolo responsivo; min-w-0 evita che spinga gli altri elementi su schermi piccoli. -->
 			<div
 				class="ml-3 min-w-0 text-xl font-bold tracking-wide text-slate-200 sm:ml-4 sm:text-2xl md:ml-6 md:text-3xl lg:text-4xl"
 			>
-				<!-- One span per character so each can animate individually. -->
+				<!-- EN: One span per character so each can animate individually. -->
+				<!-- IT: Uno span per carattere così ognuno può animarsi singolarmente. -->
 				{#each titleChars as char}
 					{#if char === ' '}
 						<span class="char-span">&nbsp;</span>

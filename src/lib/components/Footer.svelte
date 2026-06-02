@@ -4,7 +4,8 @@
 	const currentYear = new Date().getFullYear();
 </script>
 
-<!-- GitHub icon defined as a reusable <symbol>, kept self-contained in this component. -->
+<!-- EN: GitHub icon defined as a reusable <symbol>, kept self-contained in this component. -->
+<!-- IT: Icona GitHub definita come <symbol> riutilizzabile, autoconsistente nel componente. -->
 <svg class="hidden">
 	<symbol id="icon-github" viewBox="0 0 24 24" fill="currentColor">
 		<path
@@ -14,7 +15,8 @@
 </svg>
 
 <footer class="w-full border-t border-cyan-900/50 bg-black/30 px-4 py-6 backdrop-blur-md md:px-8">
-	<!-- Stacks vertically on small screens, row on larger ones. -->
+	<!-- EN: Stacks vertically on small screens, row on larger ones. -->
+	<!-- IT: Impila in verticale su schermi piccoli, in riga su quelli più grandi. -->
 	<div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row">
 		<p class="text-sm text-slate-400">
 			© {currentYear} Core Foundation Guide. An interactive field manual for AI concepts.

@@ -10,16 +10,19 @@
 	export let postIndex: CategoryIndex[] = [];
 	const dispatch = createEventDispatcher();
 
-	// Slug of the category open in the mobile accordion.
+	// EN: Slug of the category open in the mobile accordion.
+	// IT: Slug della categoria aperta nella fisarmonica mobile.
 	let openCategorySlug: string | null = null;
-	// Category panel elements, for the GSAP border effect.
+	// EN: Category panel elements, for the GSAP border effect.
+	// IT: Elementi dei pannelli di categoria, per l'effetto bordo con GSAP.
 	let categoryPanels: HTMLElement[] = [];
 
 	function toggleCategory(slug: string) {
 		openCategorySlug = openCategorySlug === slug ? null : slug;
 	}
 
-	// Tell the parent which post was clicked (for smooth scroll-to-card).
+	// EN: Tell the parent which post was clicked (for smooth scroll-to-card).
+	// IT: Comunica al genitore quale post è stato cliccato (per lo scroll fluido alla card).
 	function handleLinkClick(slug: string) {
 		dispatch('indexclick', slug);
 	}
@@ -28,7 +31,8 @@
 		categoryPanels.forEach((panel) => {
 			if (!panel) return;
 
-			// clientWidth > 0 means this is the visible desktop grid, not the hidden mobile layout.
+			// EN: clientWidth > 0 means this is the visible desktop grid, not the hidden mobile layout.
+			// IT: clientWidth > 0 indica la griglia desktop visibile, non il layout mobile nascosto.
 			if (panel.clientWidth > 0) {
 				const rect = panel.querySelector<SVGRectElement>('.glow-rect');
 				if (!rect) return;
@@ -36,7 +40,8 @@
 				const length = rect.getTotalLength();
 				const impulseLength = length * 0.25;
 
-				// stroke-dasharray/offset trick: a moving "impulse" travelling along the border.
+				// EN: stroke-dasharray/offset trick: a moving "impulse" travelling along the border.
+				// IT: trucco stroke-dasharray/offset: un "impulso" in movimento lungo il bordo.
 				gsap.set(rect, {
 					strokeDasharray: `${impulseLength} ${length}`,
 					strokeDashoffset: impulseLength,
@@ -50,7 +55,8 @@
 					repeat: -1
 				});
 
-				// Fade the glowing border in/out on hover.
+				// EN: Fade the glowing border in/out on hover.
+				// IT: Mostra/nasconde in dissolvenza il bordo luminoso all'hover.
 				panel.addEventListener('mouseenter', () => {
 					gsap.to(rect, { opacity: 1, duration: 0.3 });
 				});
@@ -63,7 +69,8 @@
 </script>
 
 <div class="mx-auto mb-16 w-full max-w-7xl px-4">
-	<!-- Desktop: grid of category panels with the animated border. -->
+	<!-- EN: Desktop: grid of category panels with the animated border. -->
+	<!-- IT: Desktop: griglia di pannelli di categoria con il bordo animato. -->
 	<div class="hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 		{#each postIndex as category, i}
 			<div
@@ -72,7 +79,8 @@
                        bg-gradient-to-br from-cyan-950/20 to-slate-950/10
                        p-5 backdrop-blur-lg"
 			>
-				<!-- SVG holding the animated glowing border, sitting behind the content. -->
+				<!-- EN: SVG holding the animated glowing border, sitting behind the content. -->
+				<!-- IT: SVG che contiene il bordo luminoso animato, dietro al contenuto. -->
 				<svg
 					class="glow-svg pointer-events-none absolute inset-0 h-full w-full"
 					width="100%"
@@ -107,7 +115,8 @@
 				<ul class="space-y-2">
 					{#each category.posts as post}
 						<li class="group/item relative">
-							<!-- preventDefault stops the anchor jump; handleLinkClick drives the custom smooth scroll. -->
+							<!-- EN: preventDefault stops the anchor jump; handleLinkClick drives the custom smooth scroll. -->
+							<!-- IT: preventDefault blocca il salto dell'ancora; handleLinkClick gestisce lo scroll fluido personalizzato. -->
 							<a
 								href={`#${post.slug}`}
 								on:click|preventDefault={() => handleLinkClick(post.slug)}
@@ -126,7 +135,8 @@
 		{/each}
 	</div>
 
-	<!-- Mobile: accordion showing one category at a time. -->
+	<!-- EN: Mobile: accordion showing one category at a time. -->
+	<!-- IT: Mobile: fisarmonica che mostra una categoria alla volta. -->
 	<div class="space-y-3 md:hidden">
 		{#each postIndex as category}
 			<div class="overflow-hidden rounded-lg border border-slate-800 bg-slate-900/50">

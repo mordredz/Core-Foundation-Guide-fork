@@ -2,20 +2,23 @@ import fm from 'front-matter';
 import { marked } from 'marked';
 import { categoryColors, defaultCategoryColor } from '$lib/config';
 
-// Formats a category slug (e.g. 'core_concepts') into a readable name ('Core Concepts').
+// EN: Formats a category slug (e.g. 'core_concepts') into a readable name ('Core Concepts').
+// IT: Formatta uno slug di categoria (es. 'core_concepts') in un nome leggibile ('Core Concepts').
 function formatCategoryName(text: string) {
 	const words = text.replace(/_/g, ' ').split(' ');
 	return words.map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
 
-// Builds a short excerpt from the post content, in both HTML and plain-text form.
+// EN: Builds a short excerpt from the post content, in both HTML and plain-text form.
+// IT: Costruisce un breve estratto dal contenuto del post, in forma sia HTML sia testo semplice.
 async function createExcerpt(
 	content: string,
 	maxLength = 150
 ): Promise<{ html: string; plain: string }> {
 	const contentWithoutFrontmatter = content.replace(/---[\s\S]*?---/, '').trim();
 
-	// Truncate without cutting a word in half.
+	// EN: Truncate without cutting a word in half.
+	// IT: Tronca senza tagliare una parola a metà.
 	const truncated =
 		contentWithoutFrontmatter.length <= maxLength
 			? contentWithoutFrontmatter
@@ -28,7 +31,8 @@ async function createExcerpt(
 
 	const html = await marked.parse(truncated);
 
-	// Plain-text version: strip the basic Markdown syntax.
+	// EN: Plain-text version: strip the basic Markdown syntax.
+	// IT: Versione in testo semplice: rimuove la sintassi Markdown di base.
 	const plain = truncated
 		.replace(/(\*\*|__)(.*?)\1/g, '$2')
 		.replace(/(\*|_)(.*?)\1/g, '$2')
@@ -38,13 +42,15 @@ async function createExcerpt(
 	return { html, plain };
 }
 
-// A source or citation listed in a post's front matter.
+// EN: A source or citation listed in a post's front matter.
+// IT: Una fonte o citazione elencata nel front matter di un post.
 export interface Source {
 	text: string;
 	url: string;
 }
 
-// The main data structure for a post.
+// EN: The main data structure for a post.
+// IT: La struttura dati principale di un post.
 export interface Post {
 	lang: string;
 	categorySlug: string;
@@ -52,22 +58,25 @@ export interface Post {
 	categoryColor: string;
 	slug: string;
 	title: string;
-	excerpt: string; // HTML version
-	plainExcerpt: string; // Plain text version
-	content?: string; // Full Markdown content
+	excerpt: string; // EN: HTML version / IT: versione HTML
+	plainExcerpt: string; // EN: Plain text version / IT: versione testo semplice
+	content?: string; // EN: Full Markdown content / IT: contenuto Markdown completo
 	sources?: Source[];
 }
 
-// In-memory cache, populated on first load to avoid reprocessing.
+// EN: In-memory cache, populated on first load to avoid reprocessing.
+// IT: Cache in memoria, popolata al primo caricamento per evitare di rielaborare.
 let allPosts: Post[] = [];
 
-// Fetches, parses and caches all posts from '/src/content'.
+// EN: Fetches, parses and caches all posts from '/src/content'.
+// IT: Recupera, analizza e mette in cache tutti i post da '/src/content'.
 export const getPosts = async (): Promise<Post[]> => {
 	if (allPosts.length > 0) {
 		return allPosts;
 	}
 
-	// '?raw' imports each Markdown file as a plain text string.
+	// EN: '?raw' imports each Markdown file as a plain text string.
+	// IT: '?raw' importa ogni file Markdown come stringa di testo grezzo.
 	const allPostFiles = import.meta.glob('/src/content/**/*.md', { query: '?raw' });
 
 	const postPromises = Object.entries(allPostFiles).map(async ([path, resolver]) => {
@@ -81,7 +90,8 @@ export const getPosts = async (): Promise<Post[]> => {
 			return null;
 		}
 
-		// Extract language, category and slug from the file path.
+		// EN: Extract language, category and slug from the file path.
+		// IT: Estrae lingua, categoria e slug dal percorso del file.
 		const match = path.match(/\/src\/content\/([^/]+)\/([^/]+)\/([^/]+)\.md$/);
 		if (!match) {
 			return null;
@@ -89,7 +99,8 @@ export const getPosts = async (): Promise<Post[]> => {
 
 		const [, lang, categorySlug, slug] = match;
 
-		// Use the front-matter excerpt if present, otherwise derive one from the body.
+		// EN: Use the front-matter excerpt if present, otherwise derive one from the body.
+		// IT: Usa l'estratto del front matter se presente, altrimenti lo ricava dal corpo.
 		const excerptData = attributes.excerpt
 			? { html: await marked.parse(attributes.excerpt), plain: attributes.excerpt }
 			: await createExcerpt(body);

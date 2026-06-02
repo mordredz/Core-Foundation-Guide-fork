@@ -22,7 +22,8 @@ jobs:
           node-version: 20
           cache: 'npm'
       - name: Install dependencies
-        # Clean, reproducible install straight from the lockfile.
+        # EN: Clean, reproducible install straight from the lockfile.
+        # IT: Installazione pulita e riproducibile direttamente dal lockfile.
         run: npm ci
       - name: Build the site
         run: npm run build
