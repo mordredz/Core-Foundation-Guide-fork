@@ -7,3 +7,9 @@ bun.lockb
 
 # Miscellaneous
 /static/
+
+# Bundled third-party library (minified) — never reformat
+src/lib/vendor/
+
+# Markdown content (prose; keep authored formatting intact)
+src/content/
