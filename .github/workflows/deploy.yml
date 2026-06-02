@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -22,10 +22,10 @@ jobs:
           node-version: 20
           cache: 'npm'
       - name: Install dependencies
-        # Questa è l'unica modifica che ci serve
-        run: npm install --legacy-peer-deps
+        # EN: Clean, reproducible install straight from the lockfile.
+        # IT: Installazione pulita e riproducibile direttamente dal lockfile.
+        run: npm ci
       - name: Build the site
-        # Nessuna variabile d'ambiente qui
         run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -11,6 +11,9 @@ const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
 export default ts.config(
 	includeIgnoreFile(gitignorePath),
+	// EN: Don't lint the bundled, minified p5.js vendor copy.
+	// IT: Non analizzare la copia vendor di p5.js (minificata).
+	{ ignores: ['src/lib/vendor/**'] },
 	js.configs.recommended,
 	...ts.configs.recommended,
 	...svelte.configs.recommended,
