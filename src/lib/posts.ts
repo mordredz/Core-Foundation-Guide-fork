@@ -1,6 +1,5 @@
 import fm from 'front-matter';
 import { marked } from 'marked';
-import { categoryColors, defaultCategoryColor } from '$lib/config';
 
 // EN: Formats a category slug (e.g. 'core_concepts') into a readable name ('Core Concepts').
 // IT: Formatta uno slug di categoria (es. 'core_concepts') in un nome leggibile ('Core Concepts').
@@ -55,7 +54,6 @@ export interface Post {
 	lang: string;
 	categorySlug: string;
 	categoryName: string;
-	categoryColor: string;
 	slug: string;
 	title: string;
 	excerpt: string; // EN: HTML version / IT: versione HTML
@@ -110,7 +108,6 @@ export const getPosts = async (): Promise<Post[]> => {
 			categorySlug,
 			slug,
 			categoryName: formatCategoryName(categorySlug),
-			categoryColor: categoryColors[categorySlug] || defaultCategoryColor,
 			title: attributes.title || 'Senza Titolo',
 			excerpt: excerptData.html,
 			plainExcerpt: excerptData.plain,

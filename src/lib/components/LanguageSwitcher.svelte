@@ -105,7 +105,7 @@
 			transition:fly={{ y: -10, duration: 200, easing: quintOut }}
 		>
 			<ul class="space-y-1">
-				{#each availableLanguages as lang}
+				{#each availableLanguages as lang (lang.code)}
 					<li>
 						<!-- EN: data-sveltekit-reload forces a full reload so the new language's load runs. -->
 						<!-- IT: data-sveltekit-reload forza un reload completo così gira il load della nuova lingua. -->

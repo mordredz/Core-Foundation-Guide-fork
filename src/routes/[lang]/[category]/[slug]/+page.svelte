@@ -68,7 +68,7 @@
 					<hr />
 					<h2>{t.sources}</h2>
 					<ol>
-						{#each post.sources as source}
+						{#each post.sources as source (source.url)}
 							<li>
 								<a
 									href={source.url}

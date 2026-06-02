@@ -33,8 +33,7 @@
 			const postInCategory = allPosts.find((p) => p.categorySlug === slug)!;
 			return {
 				slug,
-				name: postInCategory.categoryName,
-				color: postInCategory.categoryColor || 'slate'
+				name: postInCategory.categoryName
 			};
 		})
 		.sort((a, b) => {
@@ -183,7 +182,7 @@
 		/>
 	</div>
 	<div class="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
-		{#each categories as category}
+		{#each categories as category (category.slug)}
 			<!-- EN: has-[:checked] styles the label based on the checkbox state. -->
 			<!-- IT: has-[:checked] stila la label in base allo stato della checkbox. -->
 			<label

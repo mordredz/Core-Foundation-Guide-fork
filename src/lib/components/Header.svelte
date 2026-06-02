@@ -111,7 +111,7 @@
 			>
 				<!-- EN: One span per character so each can animate individually. -->
 				<!-- IT: Uno span per carattere così ognuno può animarsi singolarmente. -->
-				{#each titleChars as char}
+				{#each titleChars as char, i (i)}
 					{#if char === ' '}
 						<span class="char-span">&nbsp;</span>
 					{:else}

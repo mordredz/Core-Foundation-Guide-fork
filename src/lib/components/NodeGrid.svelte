@@ -41,12 +41,12 @@
 				// IT: Movimento fluttuante, continuo e leggero, per le card.
 				function createFloatingAnimation() {
 					params.gsap!.to(cards, {
-						y: (i) => params.gsap!.utils.random(-8, 8),
-						duration: (i) => params.gsap!.utils.random(3, 5),
+						y: () => params.gsap!.utils.random(-8, 8),
+						duration: () => params.gsap!.utils.random(3, 5),
 						repeat: -1,
 						yoyo: true,
 						ease: 'sine.inOut',
-						delay: (i) => params.gsap!.utils.random(0, 4)
+						delay: () => params.gsap!.utils.random(0, 4)
 					});
 				}
 				// EN: Pre-build a paused color timeline per card for cheap hover transitions.

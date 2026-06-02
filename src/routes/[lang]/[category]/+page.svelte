@@ -15,10 +15,8 @@
 	const category = data.category;
 	const t = lang && data.translations ? data.translations[lang] : fallbackTranslations;
 
-	// EN: NOTE: not currently wired to <NodeGrid> below, so cards on this page
-	//     don't navigate. Add `on:cardclick={handleCardClick}` to enable it.
-	// IT: NOTA: attualmente non collegata a <NodeGrid> qui sotto, quindi su questa
-	//     pagina le card non navigano. Aggiungi `on:cardclick={handleCardClick}` per abilitarlo.
+	// EN: Navigate to the article when a card is clicked.
+	// IT: Naviga all'articolo quando una card viene cliccata.
 	function handleCardClick(event: CustomEvent<{ post: Post }>) {
 		const { post } = event.detail;
 		goto(`${base}/${post.lang}/${post.categorySlug}/${post.slug}.html`);
@@ -38,7 +36,7 @@
 
 <div class="mx-auto max-w-7xl px-4 pb-12">
 	{#if posts.length > 0}
-		<NodeGrid {posts} />
+		<NodeGrid {posts} on:cardclick={handleCardClick} />
 	{:else}
 		<p class="text-center text-slate-500">{t.noPostsFound}</p>
 	{/if}

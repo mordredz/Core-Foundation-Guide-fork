@@ -166,7 +166,7 @@
 						on:change={handlePlay}
 						class="w-full rounded-md border-2 border-slate-700 bg-slate-900/50 px-2 py-1 text-sm text-white focus:border-cyan-400 focus:outline-none"
 					>
-						{#each availableVoices as voice}
+						{#each availableVoices as voice (voice.voiceURI)}
 							<option value={voice.voiceURI}>{voice.name} ({voice.lang})</option>
 						{/each}
 					</select>

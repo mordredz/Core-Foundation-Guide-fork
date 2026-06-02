@@ -72,7 +72,7 @@
 	<!-- EN: Desktop: grid of category panels with the animated border. -->
 	<!-- IT: Desktop: griglia di pannelli di categoria con il bordo animato. -->
 	<div class="hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-		{#each postIndex as category, i}
+		{#each postIndex as category, i (category.categorySlug)}
 			<div
 				bind:this={categoryPanels[i]}
 				class="relative rounded-xl border border-cyan-900/50
@@ -113,7 +113,7 @@
 					{category.categoryName}
 				</h3>
 				<ul class="space-y-2">
-					{#each category.posts as post}
+					{#each category.posts as post (post.slug)}
 						<li class="group/item relative">
 							<!-- EN: preventDefault stops the anchor jump; handleLinkClick drives the custom smooth scroll. -->
 							<!-- IT: preventDefault blocca il salto dell'ancora; handleLinkClick gestisce lo scroll fluido personalizzato. -->
@@ -138,7 +138,7 @@
 	<!-- EN: Mobile: accordion showing one category at a time. -->
 	<!-- IT: Mobile: fisarmonica che mostra una categoria alla volta. -->
 	<div class="space-y-3 md:hidden">
-		{#each postIndex as category}
+		{#each postIndex as category (category.categorySlug)}
 			<div class="overflow-hidden rounded-lg border border-slate-800 bg-slate-900/50">
 				<button
 					on:click={() => toggleCategory(category.categorySlug)}
@@ -169,7 +169,7 @@
 						transition:slide={{ duration: 300, easing: quintOut }}
 					>
 						<ul class="mt-4 space-y-2">
-							{#each category.posts as post}
+							{#each category.posts as post (post.slug)}
 								<li class="group relative">
 									<a
 										href={`#${post.slug}`}
