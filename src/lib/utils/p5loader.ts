@@ -1,7 +1,5 @@
-// English: Extends the global Window interface to inform TypeScript about the `p5` property,
-//          which is added when the p5.js script is loaded.
-// Italiano: Estende l'interfaccia globale Window per informare TypeScript della proprietà `p5`,
-//           che viene aggiunta quando lo script p5.js è caricato.
+// EN: Tells TypeScript about the global `p5` that the script attaches to window.
+// IT: Informa TypeScript della proprietà globale `p5` che lo script aggiunge a window.
 declare global {
 	interface Window {
 		p5: any;
@@ -9,22 +7,13 @@ declare global {
 }
 
 /**
- * English: Dynamically loads the p5.js library from the local vendor directory.
- *          This ensures it's only loaded on the client-side and when needed,
- *          improving initial page load performance.
- * Italiano: Carica dinamicamente la libreria p5.js dalla cartella vendor locale.
- *           Questo assicura che venga caricata solo sul lato client e quando necessario,
- *           migliorando le prestazioni di caricamento iniziale della pagina.
- * @returns A promise that resolves to the global p5 instance.
+ * EN: Loads p5.js lazily from the local vendor copy (client-side only, no CDN).
+ * IT: Carica p5.js in modo lazy dalla copia vendor locale (solo client-side, niente CDN).
+ * @returns A promise resolving to the p5 constructor.
  */
 export async function loadP5() {
-	// English: Import the library from a local file to avoid relying on external CDNs.
-	// Italiano: Importa la libreria da un file locale per evitare di dipendere da CDN esterni.
 	const module = await import('$lib/vendor/p5.min.js');
-
-	// English: Returns the p5 instance. It checks for `module.default` first
-	//          and falls back to the global `window.p5` for compatibility.
-	// Italiano: Restituisce l'istanza di p5. Controlla prima `module.default`
-	//           e utilizza come fallback `window.p5` per compatibilità.
+	// EN: Prefer the ESM default export, fall back to the global for older builds.
+	// IT: Preferisce l'export default ESM, con fallback alla variabile globale per build più datate.
 	return module.default || window.p5;
 }

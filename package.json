@@ -1,5 +1,5 @@
 {
-	"name": "project-x",
+	"name": "core-foundation-guide",
 	"private": true,
 	"version": "1.0.0",
 	"type": "module",
@@ -30,7 +30,7 @@
 		"globals": "^16.0.0",
 		"mdsvex": "^0.12.6",
 		"postcss": "~8.4.38",
-		"prettier": "^3.4.2",
+		"prettier": "~3.6.2",
 		"prettier-plugin-svelte": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.11",
 		"remark-gfm": "^4.0.1",
